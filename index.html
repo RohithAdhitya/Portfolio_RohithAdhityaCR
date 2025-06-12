@@ -1,134 +1,407 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Rohith Adhitya | Portfolio</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet"/>
   <style>
+    * {
+      box-sizing: border-box;
+    }
     body {
       margin: 0;
-      font-family: 'Segoe UI', sans-serif;
-      background-color: #0d1117;
-      color: #c9d1d9;
+      font-family: 'Poppins', sans-serif;
+      background-color: #F2E9E4;
+      color: #22223B;
       display: flex;
+      height: 100vh;
     }
     .sidebar {
-      width: 300px;
-      background-color: #161b22;
+      width: 320px;
+      background-color: #4A4E69;
       padding: 2rem;
+      border-radius: 16px;
+      margin: 1rem;
       display: flex;
       flex-direction: column;
       align-items: center;
+      color: #F2E9E4;
+      box-shadow: 2px 2px 12px rgba(0, 0, 0, 0.15);
     }
     .sidebar h1 {
-      color: #f0f6fc;
       font-size: 1.5rem;
       text-align: center;
     }
+    .sidebar h2.tagline {
+      margin-top: 0.5rem;
+      font-size: 1rem;
+      color: #C9ADA7;
+      font-weight: normal;
+    }
     .sidebar img {
-      width: 120px;
-      height: 120px;
+      width: 140px;
+      height: 140px;
       border-radius: 50%;
       object-fit: cover;
       margin: 1rem 0;
+      border: 2px solid #C9ADA7;
     }
     .contact {
       margin-top: 1rem;
-      font-size: 0.9rem;
+      font-size: 0.95rem;
+      width: 100%;
+      padding: 1.5rem;
+      background-color: #22223B;
+      border-radius: 16px;
     }
     .contact p {
-      margin: 0.5rem 0;
+      margin: 1rem 0;
+      display: flex;
+      align-items: center;
     }
     .contact a {
-      color: #58a6ff;
+      color: #C9ADA7;
       text-decoration: none;
+    }
+    .contact i {
+      width: 24px;
+      margin-right: 10px;
+      font-size: 1.1rem;
+      color: #F2E9E4;
+    }
+    .resume-button {
+      display: inline-block;
+      margin-top: 1.5rem;
+      padding: 0.6rem 1.2rem;
+      background-color: #4A4E69;
+      color: #F2E9E4;
+      text-decoration: none;
+      border: 1px solid #C9ADA7;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      text-align: center;
+    }
+    .resume-button:hover {
+      background-color: #6B708D;
+      color: #fff;
     }
     .main {
       flex: 1;
       padding: 2rem;
+      margin: 1rem 1rem 1rem 0;
+      background-color: #F8F6F4;
+      display: flex;
+      flex-direction: column;
+      border-radius: 16px;
+      box-shadow: 0 0 12px rgba(0, 0, 0, 0.05);
+      overflow-y: auto;
+    }
+    nav {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 1.5rem;
+    }
+    nav a {
+      margin-left: 1rem;
+      color: #4A4E69;
+      text-decoration: none;
+      font-weight: 500;
+      font-size: 1rem;
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      background-color: #F2E9E4;
+      border: 1px solid #C9ADA7;
+      transition: background-color 0.3s ease;
+      cursor: pointer;
+    }
+    nav a:hover {
+      background-color: #e8dcd6;
     }
     h2 {
-      color: #f0f6fc;
+      color: #22223B;
       margin-top: 0;
-      border-bottom: 2px solid #30363d;
+      border-bottom: 2px solid #C9ADA7;
       padding-bottom: 0.5rem;
     }
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      grid-template-columns: repeat(2, 1fr);
       gap: 1rem;
       margin-top: 1rem;
     }
     .card {
-      background-color: #161b22;
-      border: 1px solid #30363d;
-      border-radius: 8px;
+      background-color: #f9f7f6;
+      border: 1px solid #e3dbd7;
+      border-radius: 10px;
       padding: 1rem;
+      box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05);
     }
     .card h3 {
       margin-top: 0;
-      color: #58a6ff;
       font-size: 1rem;
+      font-weight: 600;
+      color: #4A4E69;
     }
     .card i {
       font-size: 1.2rem;
       margin-right: 0.5rem;
-      color: #f0f6fc;
     }
-    nav {
-      margin-top: 2rem;
+
+    .section-intro {
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+    color: #4A4E69;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeSlideIn 1s ease forwards;
     }
-    nav a {
-      margin-right: 1rem;
-      color: #58a6ff;
-      text-decoration: none;
+
+    @keyframes fadeSlideIn {
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
+    }
+
+    .slide-in-left {
+    opacity: 0;
+    transform: translateX(-30px);
+    animation: slideInLeft 0.8s ease forwards;
+    }
+    @keyframes slideInLeft {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    }
+
+    .slide-in-right {
+    opacity: 0;
+    transform: translateX(30px);
+    animation: slideInRight 0.8s ease forwards;
+    }
+    @keyframes slideInRight {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+    }
+
+    .project-fade-in {
+    opacity: 0;
+    transform: scale(0.95);
+    animation: projectFadeIn 0.8s ease forwards;
+    }
+
+    @keyframes projectFadeIn {
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+    }
+
+    /*.card.glow {
+    background-color: #f9f7f6;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 12px rgba(202, 173, 167, 0.5);
+    }*/
+
+    .card.glow {
+    background: radial-gradient(circle at top left, #f2e9e4, #f9f7f6);
+    border: 1px solid #e5dad4;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 0 18px rgba(74, 78, 105, 0.15);
+    }
+
+    .glow-card {
+    background-color: #f9f7f6;
+    border: 1px solid #e3dbd7;
+    border-radius: 10px;
+    padding: 1rem;
+    /*box-shadow: 0 0 12px rgba(202, 173, 167, 0.5);*/
+    box-shadow: 0 0 18px rgba(202, 173, 167, 0.75);
+    transition: transform 0.3s;
+    }
+
+
+
   </style>
 </head>
 <body>
   <div class="sidebar">
     <h1>Rohith Adhitya Chinnannan Rajkumar</h1>
-    <img src="https://avatars.githubusercontent.com/u/000000?v=4" alt="Profile Photo">
+    <h2 class="tagline">Data Enthusiast</h2>
+    <img src="https://github.com/RohithAdhitya.png" alt="GitHub Profile Photo" />
     <div class="contact">
       <p><i class="fas fa-envelope"></i> <a href="mailto:rohithadhitya@gmail.com">rohithadhitya@gmail.com</a></p>
       <p><i class="fas fa-phone"></i> <a href="tel:+18577018735">+1 (857) 701-8735</a></p>
-      <p><i class="fas fa-map-marker-alt"></i> Boston, Massachusetts</p>
+      <p><i class="fas fa-map-marker-alt"></i> <a href="https://www.google.com/maps/place/Boston,+MA" target="_blank">Boston, Massachusetts</a></p>
       <p><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/rohith-adhitya/" target="_blank">LinkedIn</a></p>
       <p><i class="fab fa-github"></i> <a href="https://github.com/RohithAdhitya" target="_blank">GitHub</a></p>
+      <a class="resume-button" href="resume.pdf" download>📄 Download Resume</a>
     </div>
   </div>
+
   <div class="main">
     <nav>
-      <a href="index.html">Home</a>
-      <a href="mywork.html">My Works</a>
+      <a onclick="loadContent('home')">Home</a>
+      <a onclick="loadContent('journey')">My Journey</a>
+      <a onclick="loadContent('datalab')">Data Lab</a>
     </nav>
-    <section>
-      <h2>About Me</h2>
-      <p>I’m a Data Analytics Engineering graduate from Northeastern University with hands-on experience in data analysis, dashboard development, and pipeline automation. At Technocart, I worked on pricing optimization, advertising performance tracking, and building interactive Tableau dashboards. I’ve also implemented ETL workflows using PySpark and SQL, contributing to data-driven decision-making across operations and marketing. I enjoy using data to solve real-world problems and create measurable business impact.</p>
-    </section>
 
-    <section>
-      <h2>What I'm Doing</h2>
-      <div class="grid">
-        <div class="card">
-          <h3><i class="fas fa-chart-line"></i>Data Analysis</h3>
-          <p>Exploratory and statistical analysis to generate actionable business insights.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-briefcase"></i>Business Intelligence</h3>
-          <p>Developing dashboards in Tableau and Power BI to support strategic decisions.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-cogs"></i>Data Engineering</h3>
-          <p>Automating pipelines using Airflow, AWS, and Spark for real-time analytics.</p>
-        </div>
-        <div class="card">
-          <h3><i class="fas fa-brain"></i>Data Science</h3>
-          <p>Using ML techniques for segmentation, classification, and predictive analytics.</p>
-        </div>
-      </div>
-    </section>
+    <div id="main-container">
+      <!-- Content loads here -->
+    </div>
   </div>
+
+  <script>
+    const homeContent = `
+      <section>
+        <h2><i class="fas fa-user" style="margin-right: 8px;"></i>About Me</h2>
+        <p>I’m a Data Analytics Engineering graduate from Northeastern University with hands-on experience in data analysis, dashboard development, and pipeline automation. At Technocart, I worked on pricing optimization, advertising performance tracking, and building interactive Tableau dashboards. I’ve also implemented ETL workflows using PySpark and SQL, contributing to data-driven decision-making across operations and marketing. I enjoy using data to solve real-world problems and create measurable business impact.</p>
+      </section>
+      <section>
+        <h2><i class="fas fa-tools" style="margin-right: 8px;"></i>Things I Build with Data</h2>
+        <div class="grid">
+          <div class="card glow">
+            <h3><i class="fas fa-chart-line"></i>Data Analysis</h3>
+            <p>Exploratory and statistical analysis to generate actionable business insights.</p>
+          </div>
+          <div class="card glow">
+            <h3><i class="fas fa-briefcase"></i>Business Intelligence</h3>
+            <p>Developing dashboards in Tableau and Power BI to support strategic decisions.</p>
+          </div>
+          <div class="card glow">
+            <h3><i class="fas fa-cogs"></i>Data Engineering</h3>
+            <p>Automating pipelines using Airflow, AWS, and Spark for real-time analytics.</p>
+          </div>
+          <div class="card glow">
+            <h3><i class="fas fa-brain"></i>Data Science</h3>
+            <p>Using ML techniques for segmentation, classification, and predictive analytics.</p>
+          </div>
+        </div>
+      </section>
+    `;
+
+    const myJourneyContent = `
+    <section>
+        <h2><i class="fas fa-briefcase"></i> Experience</h2>
+        <div style="background-color: #f2e9e4; padding: 1rem; border-radius: 10px; margin-bottom: 1.5rem;", class="journey-section slide-in-left">
+        <p><strong>Technocart</strong> — Tamil Nadu, India</p>
+        <p><em>Business Data Analyst</em> | Apr 2022 – Jul 2023</p>
+        <ul style="margin: 0; padding-left: 1rem;">
+            <li>Analyzed Amazon Seller Central data to boost company sales by 42.3%</li>
+            <li>Optimized ad campaigns, lowering ACOS by 18%</li>
+            <li>Built Tableau dashboards for key KPIs</li>
+            <li>Automated PySpark + SQL pipelines to reduce manual work by 45%</li>
+            <li>Performed competitor pricing & listing analysis</li>
+            <li>Identified emerging trends, boosting engagement by 15%</li>
+            <li>Worked cross-functionally to reduce returns and improve stock availability</li>
+        </ul>
+        </div>
+
+        <h2><i class="fas fa-graduation-cap"></i> Education</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 1rem;">
+        <div class="education-section slide-in-right", style="flex: 1; min-width: 200px; background-color: #f2e9e4; padding: 1rem; border-radius: 10px; animation-delay: 0.2s;">
+            <p><strong>Northeastern University</strong><br>Boston, MA</p>
+            <p><em>M.S. in Data Analytics Engineering</em><br>GPA: 3.91 | May 2025</p>
+        </div>
+        <div class="education-section slide-in-right", style="flex: 1; min-width: 200px; background-color: #f2e9e4; padding: 1rem; border-radius: 10px; animation-delay: 0.3s;">
+            <p><strong>Amrita Vishwa Vidyapeetham</strong><br>Coimbatore, India</p>
+            <p><em>B.Tech in Computer Science and Engineering</em><br>GPA: 3.1 | Jun 2023</p>
+        </div>
+        </div>
+    </section>
+    `;
+
+
+    const dataLabContent = `
+    <section>
+    <h2><i class="fas fa-desktop"></i> Data Lab</h2>
+    <p class="section-intro">From ideas to implementation — see how it all came together.</p>
+
+    <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 2rem;">
+    
+        <!-- Brain Tumor Detection -->
+        <div style="text-align: center;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/Brain-Tumor-Detection" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454166412-ab2143d1-136d-4be1-8931-bfaea562cb42.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2ODk3MDQsIm5iZiI6MTc0OTY4OTQwNCwicGF0aCI6Ii82MzkwMDc4OC80NTQxNjY0MTItYWIyMTQzZDEtMTM2ZC00YmUxLTg5MzEtYmZhZWE1NjJjYjQyLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTAwNFomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWE2NjU4MzhiMmEwMzYyYjU4OGM3OWMzZjM4NjFhOGE4NTJkNzE5NGQ1OWZkMGNmNmFlYWM0ZTg2NzMwMWNmYzQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.cisNMBLMWNTN6PcE8WDN3L3PyWXczq1fdSRs3o0QSFY" alt="Brain Tumor" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">Brain Tumor Detection</h3>
+        </div>
+
+        <!-- Multilingual News Similarity -->
+        <div style="text-align: center; animation-delay: 0.1s;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/Multilingual-News-Article-Similarity-SBERT" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454166725-ed757f60-b791-4941-b7f9-e50ac12ce0a0.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2ODk3OTYsIm5iZiI6MTc0OTY4OTQ5NiwicGF0aCI6Ii82MzkwMDc4OC80NTQxNjY3MjUtZWQ3NTdmNjAtYjc5MS00OTQxLWI3ZjktZTUwYWMxMmNlMGEwLmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTEzNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTc1NDVmODc1ZGYyMjg5NWViYmI0ZWM1NGY5MTRlYTU5ZGQyZTMyOTFjN2UwODBjMjdmY2UxZDlkNzMwOWExMjgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.M1hhSPqCc6wkPVLz8pZRn7gfMI9Z0Fi9ldBVCl7Y8Dw" alt="News Similarity" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">Multilingual News Similarity</h3>
+        </div>
+
+        <!-- Predicting Alzheimer -->
+        <div style="text-align: center; animation-delay: 0.2s;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/Predicting-Alzheimer-MachineLearning" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454167104-d80e7321-7cac-48e1-bb84-44eaf2678140.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2ODk4OTEsIm5iZiI6MTc0OTY4OTU5MSwicGF0aCI6Ii82MzkwMDc4OC80NTQxNjcxMDQtZDgwZTczMjEtN2NhYy00OGUxLWJiODQtNDRlYWYyNjc4MTQwLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTMxMVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWJjZDFlY2E4NjYxNTBhNWUyYTE0NzA1NzkwNjZkMTY0YmJiNzE3MWM3M2EyNDJhNzJlOGFkODVkN2NkZWI1ODcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.aXwNzEvQivHmW_0UoHJYCz-oROVm22LdgwU4HkjXHE0" alt="Alzheimer Prediction" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">Predicting Alzheimer</h3>
+        </div>
+
+        <!-- Accounts Payable Flow -->
+        <div style="text-align: center; animation-delay: 0.3s;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/Accounts-Payable-Flow" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454167195-a3ede15d-1b6f-4360-ad9c-b370b6b38983.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2ODk5MTUsIm5iZiI6MTc0OTY4OTYxNSwicGF0aCI6Ii82MzkwMDc4OC80NTQxNjcxOTUtYTNlZGUxNWQtMWI2Zi00MzYwLWFkOWMtYjM3MGI2YjM4OTgzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTMzNVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPWIxYzkwNTIwNTMyMzk4MDFmNWJlNTI1MjhmMjcxZGExZWQ1OWYxOTY0MDJkZDY4Nzg4MzgyZjgxNGQ3ZmU4OTgmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.K0LLGFFJjdXl0XaXrChVXL8bKoWgtjigebwYD6wfAuY" alt="Accounts Payable" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">Accounts Payable Flow</h3>
+        </div>
+
+        <!-- EEG Seizure Detection -->
+        <div style="text-align: center; animation-delay: 0.4s;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/EEG-Seizure-Detection" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454167880-0eb175cb-23f8-48fc-9b6f-2b1f19c41ef3.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2OTAwNzYsIm5iZiI6MTc0OTY4OTc3NiwicGF0aCI6Ii82MzkwMDc4OC80NTQxNjc4ODAtMGViMTc1Y2ItMjNmOC00OGZjLTliNmYtMmIxZjE5YzQxZWYzLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTYxNlomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE1MTQ1ZWZkZGRmMGZmYTAyNWMwNTVjZTVjMDlmZjJjYjRhNjY3MWI3NjY2YTcyYjg0NGVmYTI4NjcwYWYzMmQmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.CIIoqjdCzjvYV6TAEqjPLmoY9muBzNqUo_Vm3mJ2mQI" alt="EEG Seizure" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">EEG Seizure Detection</h3>
+        </div>
+
+        <!-- Customer Segmentation -->
+        <div style="text-align: center; animation-delay: 0.5s;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/eCommerce-Customer-Segmentation-RFM" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454167370-ed6f55e5-f7dd-444f-b351-bed70a2544d4.jpg?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2ODk5NDksIm5iZiI6MTc0OTY4OTY0OSwicGF0aCI6Ii82MzkwMDc4OC80NTQxNjczNzAtZWQ2ZjU1ZTUtZjdkZC00NDRmLWIzNTEtYmVkNzBhMjU0NGQ0LmpwZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTQwOVomWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTJmYmI4YzIwMzJkMzhjNGI0ZWIyNmMzOTljOGFjNmM1NDBhYWU0MjY5NzNiYTk2ODViNTBhN2FiMGUyZTE1ZWEmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.AKqu0P2yvCLroqNIApQ2g7qjoUvSyxG68rsnltvzEWQ" alt="Customer Segmentation" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">Customer Segmentation (RFM)</h3>
+        </div>
+
+        <!-- LA Crime Analysis -->
+        <div style="text-align: center; animation-delay: 0.6s;", class="project-fade-in glow-card">
+        <a href="https://github.com/RohithAdhitya/LosAngeles-Crime-Data-Analysis" target="_blank">
+            <img src="https://private-user-images.githubusercontent.com/63900788/454167467-08e90290-02e5-48c4-9868-38f7c50bb03c.png?jwt=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJnaXRodWIuY29tIiwiYXVkIjoicmF3LmdpdGh1YnVzZXJjb250ZW50LmNvbSIsImtleSI6ImtleTUiLCJleHAiOjE3NDk2ODk5NzcsIm5iZiI6MTc0OTY4OTY3NywicGF0aCI6Ii82MzkwMDc4OC80NTQxNjc0NjctMDhlOTAyOTAtMDJlNS00OGM0LTk4NjgtMzhmN2M1MGJiMDNjLnBuZz9YLUFtei1BbGdvcml0aG09QVdTNC1ITUFDLVNIQTI1NiZYLUFtei1DcmVkZW50aWFsPUFLSUFWQ09EWUxTQTUzUFFLNFpBJTJGMjAyNTA2MTIlMkZ1cy1lYXN0LTElMkZzMyUyRmF3czRfcmVxdWVzdCZYLUFtei1EYXRlPTIwMjUwNjEyVDAwNTQzN1omWC1BbXotRXhwaXJlcz0zMDAmWC1BbXotU2lnbmF0dXJlPTE3ZjViOWU4YTVmMDU2OGQxMWIxOWM0Mjg5NjQ3MzQ1YTI2Mzc4Y2JlMzI3MGM1Y2U1MWU4OWM5NjE0ODNjMDcmWC1BbXotU2lnbmVkSGVhZGVycz1ob3N0In0.CO_vGlSqXSuNfu7e_gBJb-DekuzgTHkxFY5bE4WXRdY" alt="LA Crime" style="width: 100%; height: 180px; object-fit: cover; border-radius: 10px; box-shadow: 0 2px 6px rgba(0,0,0,0.15); transition: transform 0.3s;" onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'">
+        </a>
+        <h3 style="margin-top: 0.5rem;">LA Crime Data Analysis</h3>
+        </div>
+
+    </div>
+    </section>
+    `;
+
+
+
+
+
+    function loadContent(section) {
+      const container = document.getElementById("main-container");
+      if (section === "home") container.innerHTML = homeContent;
+      else if (section === "journey") container.innerHTML = myJourneyContent;
+      else if (section === "datalab") container.innerHTML = dataLabContent;
+    }
+
+    // Load home by default
+    window.onload = () => loadContent("home");
+  </script>
 </body>
 </html>
